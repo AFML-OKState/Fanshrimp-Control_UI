@@ -31,7 +31,7 @@ class JrkG2Serial(object):
     self.send_command(0xC0 + (target & 0x1F), (target >> 5) & 0x7F)
 
   def stop(self):
-    self.send_command(2048)
+    self.set_target(2048)
  
   # Gets the Target variable from the Jrk.
   def get_target(self):
@@ -43,7 +43,6 @@ class JrkG2Serial(object):
     b = self.get_variables(0x04, 2)
     return b[0] + 256 * b[1]
  
-
 if __name__ == "__main__":
     # Choose the serial port name.  If the Jrk is connected directly via USB,
     # you can run "jrk2cmd --cmd-port" to get the right name to use here.
