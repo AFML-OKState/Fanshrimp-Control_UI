@@ -7,55 +7,96 @@
     <x>0</x>
     <y>0</y>
     <width>370</width>
-    <height>212</height>
+    <height>143</height>
    </rect>
+  </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
   </property>
   <property name="windowTitle">
    <string>Motor Control</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>shrimp.png</normaloff>shrimp.png</iconset>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>50</y>
-     <width>311</width>
+     <x>10</x>
+     <y>10</y>
+     <width>351</width>
      <height>96</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
+    <item row="2" column="1">
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Status</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Frequency Setpoint [Hz]</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QLineEdit" name="com_in">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QLabel" name="status_out">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="1">
      <widget class="QLabel" name="label_2">
       <property name="text">
        <string>Com Port</string>
       </property>
-     </widget>
-    </item>
-    <item row="0" column="2">
-     <widget class="QLineEdit" name="com_in"/>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>Frequency Setpoint</string>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </item>
-    <item row="2" column="1">
-     <widget class="QLabel" name="label_3">
-      <property name="text">
-       <string>Frquency Measured</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="2">
-     <widget class="QLabel" name="meas_out">
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="2">
+    <item row="1" column="2" alignment="Qt::AlignHCenter">
      <widget class="QDoubleSpinBox" name="SP_in">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
       <property name="decimals">
        <number>0</number>
       </property>
@@ -69,8 +110,8 @@
   <widget class="QPushButton" name="set_but">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>160</y>
+     <x>190</x>
+     <y>110</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -82,8 +123,8 @@
   <widget class="QPushButton" name="stop_but">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>160</y>
+     <x>280</x>
+     <y>110</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -95,8 +136,8 @@
   <widget class="QPushButton" name="con_but">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>160</y>
+     <x>100</x>
+     <y>110</y>
      <width>75</width>
      <height>23</height>
     </rect>

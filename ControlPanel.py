@@ -2,19 +2,18 @@
 import sys
 import serial
 from PyQt5.QtWidgets import QDialog, QApplication
-from PyQt5.QtWidgets import QFileDialog,QMessageBox
-from PyQt5.QtGui import QCursor
 from PyQt5.QtCore import Qt
 
 from UI.window import Ui_Dialog
 from Classes.jrk import JrkG2Serial
+from Classes.motor import Motor
 
 class main_window(QDialog):
     def __init__(self):
-        
-        super(main_window,self).__init__()
 
-        #back to standard code
+        self.m = Motor(12,30,6,900)
+
+        super(main_window,self).__init__()
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
         self.assign_widgets()
@@ -29,23 +28,25 @@ class main_window(QDialog):
         com = self.ui.com_in.text()
         try:
             port = serial.Serial(com, 9600, timeout=0.1, write_timeout=0.1)
-            self.jrk = JrkG2Serial(port,None)
-            print("Connected")
+            self.jrk = JrkG2Serial(port,self.m,None)
+            self.ui.status_out.setText("Connected to port: " + com)
         except:
-            print("Could not connect to port:" + com)
+            self.ui.status_out.setText("Could not connect to port: " + com)
 
     def SP(self):
         try:
-            f = int(self.ui.SP_in.value())
-            self.jrk.set_target(f)
+            ω = self.ui.SP_in.value()
+            self.jrk.set_target_RPM(ω)
+            self.ui.status_out.setText("Motor setpoint: {3f} [RPM]".format(ω))
         except:
-            print("Jrk not initialized")
+            self.ui.status_out.setText("Jrk not initialized")
 
     def stop(self):
         try:
             self.jrk.stop()
+            self.ui.status_out.setText("Motor is stopped")
         except:
-            print("Jrk not initialized")
+            self.ui.status_out.setText("Jrk not initialized")
 
     def ExitApp(self):
         app.exit()
