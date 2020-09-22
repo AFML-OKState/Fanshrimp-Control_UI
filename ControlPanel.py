@@ -6,12 +6,9 @@ from PyQt5.QtCore import Qt
 
 from UI.window import Ui_Dialog
 from Classes.jrk import JrkG2Serial
-from Classes.motor import Motor
 
 class main_window(QDialog):
     def __init__(self):
-
-        self.m = Motor(12,30,6,900)
 
         super(main_window,self).__init__()
         self.ui = Ui_Dialog()
@@ -28,7 +25,7 @@ class main_window(QDialog):
         com = self.ui.com_in.text()
         try:
             port = serial.Serial(com, 9600, timeout=0.1, write_timeout=0.1)
-            self.jrk = JrkG2Serial(port,self.m,None)
+            self.jrk = JrkG2Serial(port,None)
             self.ui.status_out.setText("Connected to port: " + com)
         except:
             self.ui.status_out.setText("Could not connect to port: " + com)
@@ -37,9 +34,9 @@ class main_window(QDialog):
         try:
             ω = self.ui.SP_in.value()
             self.jrk.set_target_RPM(ω)
-            self.ui.status_out.setText("Motor setpoint: {3f} [RPM]".format(ω))
+            self.ui.status_out.setText("Motor setpoint: {:.2f} [RPM]".format(ω))
         except:
-            self.ui.status_out.setText("Jrk not initialized")
+            self.ui.status_out.setText("Setpoint was not set")
 
     def stop(self):
         try:

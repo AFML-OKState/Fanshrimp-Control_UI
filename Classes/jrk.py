@@ -7,13 +7,12 @@
 from time import sleep
 import serial
 import numpy as np
-from motor import Motor
 
 class JrkG2Serial(object):
-  def __init__(self, port, motor, device_number=None):
+  def __init__(self, port, device_number=None):
     self.port = port
     self.device_number = device_number
-    self.m = motor
+
  
   def send_command(self, cmd, *data_bytes):
     if self.device_number == None:
@@ -37,8 +36,11 @@ class JrkG2Serial(object):
     return b[0] + 256 * b[1]
 
   def set_target_RPM(self,ω):
-    sp =int((2047/self.m.RPM)*(ω) + 2048)
-    self.set_target(sp)
+    if ω == 0:
+      self.set_target(2048)
+    else:
+      sp = int((ω + 683.21)/0.3485)
+      self.set_target(sp)
 
   def stop(self):
     self.set_target(2048)
@@ -70,14 +72,13 @@ if __name__ == "__main__":
     # use the Pololu Protocol.
     device_number = None
 
-    motor = Motor(12,30,6,900)
 
     port = serial.Serial(port_name, baud_rate, timeout=0.1, write_timeout=0.1)
     
-    jrk = JrkG2Serial(port,motor, device_number)
+    jrk = JrkG2Serial(port,device_number)
 
     target = 0
-    while target <= 900:
+    while target <= 730:
       jrk.set_target_RPM(target)
 
       FB = jrk.get_FBT_scaled()
