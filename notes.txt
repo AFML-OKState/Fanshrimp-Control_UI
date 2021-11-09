@@ -1,1 +1,4 @@
 https://www.pololu.com/docs/0J38
+
+To install all dependencies use the following command:
+    pip3 install -r requirements.txt

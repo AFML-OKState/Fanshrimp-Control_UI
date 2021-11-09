@@ -5,7 +5,7 @@ import time
 from PyQt5.QtWidgets import QDialog, QApplication
 from PyQt5.QtCore import Qt
 
-from UI.window_2 import Ui_Dialog
+from UI.window import Ui_Dialog
 from Classes.jrk import JrkG2Serial
 
 class main_window(QDialog):

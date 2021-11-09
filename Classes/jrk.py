@@ -6,7 +6,6 @@
  
 from time import sleep
 import serial
-import numpy as np
 
 class JrkG2Serial(object):
   def __init__(self, port, device_number=None):
